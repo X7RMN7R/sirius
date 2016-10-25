@@ -32,6 +32,18 @@ xmlns:xsi="http://www/w3.org/2001/XMLSchema-instance">
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		  <groupId>com.mysema.querydsl</groupId>
+		  <artifactId>querydsl-apt</artifactId>
+		  <version>3.7.4</version>
+		  <scope>provided</scope>
+		</dependency>    
+		    
+		<dependency>
+		  <groupId>com.mysema.querydsl</groupId>
+		  <artifactId>querydsl-jpa</artifactId>
+		  <version>3.7.4</version>
+		</dependency>
 	</dependencies>
 	
 	<build>
@@ -40,6 +52,22 @@ xmlns:xsi="http://www/w3.org/2001/XMLSchema-instance">
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+		    <plugin>
+		      <groupId>com.mysema.maven</groupId>
+		      <artifactId>maven-apt-plugin</artifactId>
+		      <version>1.0</version>
+		      <executions>
+		        <execution>
+		          <goals>
+		            <goal>process</goal>
+		          </goals>
+		          <configuration>
+		            <outputDirectory>target/generated-sources/java</outputDirectory>
+		            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+		          </configuration>
+		        </execution>
+		      </executions>
+		    </plugin>
 		</plugins>
 	</build>
 	
@@ -50,7 +78,7 @@ xmlns:xsi="http://www/w3.org/2001/XMLSchema-instance">
 			<url>https://repo.spring.io/libs-release</url>
 		</repository>
 		<repository>
-			<id>sorg.jboss.repository.releases</id>
+			<id>org.jboss.repository.releases</id>
 			<name>JBoss Maven Release Repository</name>
 			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
 		</repository>
