@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+
 @SpringBootApplication
 public class Application {
 	
@@ -46,6 +48,15 @@ public class Application {
 			log.info("---------------------------------------------");
 			for (Customer bauer : repository.findByLastName("Bauer")) {
 				log.info(bauer.toString());
+			}
+			log.info("");
+			
+			//fetch customers by last name using a predicate
+			log.info("Customers found with query():");
+			log.info("---------------------------------------------");
+			BooleanExpression predicate = QCustomer.customer.lastName.eq("Bauer");
+			for (Customer foundCustomer : repository.findAll(predicate)) {
+				log.info(foundCustomer.toString());
 			}
 			log.info("");
 		};
