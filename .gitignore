@@ -2,9 +2,6 @@
 .project
 .settings/
 target/
-gradle/
-.gradle/
-gradlew
-gradlew.bat
-build/
-
+.mvn/
+mvnw
+mvnw.cmd
